@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sampler</title>
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="bufferloader.js"></script>
+        <script src="sampler.js"></script>
+    </head>
+    <body>
+        <style>
+
+            #samplerwrapper {
+                height: 100px;
+                width: 336px;
+                background-color:#FF7C00;
+                margin: 0 auto;
+            }
+            
+            .sample {
+                height: 30px;
+                width: 30px;
+                background-color: #222;
+                float: left;
+                margin: 6px;   
+                border-top: solid #B2AEAE 2px;
+                border-right: solid #B2AEAE 2px;
+                box-sizing: border-box;
+            }
+            
+            .active {
+                border: solid #12B6CC 5px;   
+                box-sizing: border-box;
+            }
+            
+            /*  SAMPLER 2          */
+            #samplerwrapper2 {
+                height: 273px;
+                width: 272px;
+                background-color:#FF7C00;
+                margin: 0 auto;
+            }
+            
+            .bar {
+                border-radius: 4px;
+                height: 30px;
+                width: 30px;
+                background-color: #222;
+                float: left;
+                margin: 2px;   
+                border-top: solid #B2AEAE 2px;
+                border-right: solid #B2AEAE 2px;
+                box-sizing: border-box;
+            }
+        </style>
+        <div id="samplerwrapper">
+            <div class="sample" id="sample0"></div>
+            <div class="sample" id="sample1"></div>
+            <div class="sample" id="sample2"></div>
+            <div class="sample" id="sample3"></div>
+            <div class="sample" id="sample4"></div>
+            <div class="sample" id="sample5"></div>
+            <div class="sample" id="sample6"></div>
+            <div class="sample" id="sample7"></div>
+        </div>
+        <hr/>
+        <div id="samplerwrapper2">
+            <div class="bar" id="bar00"></div>
+            <div class="bar" id="bar01"></div>
+            <div class="bar" id="bar02"></div>
+            <div class="bar" id="bar03"></div>
+            <div class="bar" id="bar04"></div>
+            <div class="bar" id="bar05"></div>
+            <div class="bar" id="bar06"></div>
+            <div class="bar" id="bar07"></div>
+            
+            <div class="bar" id="bar10"></div>
+            <div class="bar" id="bar11"></div>
+            <div class="bar" id="bar12"></div>
+            <div class="bar" id="bar13"></div>
+            <div class="bar" id="bar14"></div>
+            <div class="bar" id="bar15"></div>
+            <div class="bar" id="bar16"></div>
+            <div class="bar" id="bar17"></div>
+            
+            <div class="bar" id="bar20"></div>
+            <div class="bar" id="bar21"></div>
+            <div class="bar" id="bar22"></div>
+            <div class="bar" id="bar23"></div>
+            <div class="bar" id="bar24"></div>
+            <div class="bar" id="bar25"></div>
+            <div class="bar" id="bar26"></div>
+            <div class="bar" id="bar27"></div>
+            
+            <div class="bar" id="bar30"></div>
+            <div class="bar" id="bar31"></div>
+            <div class="bar" id="bar32"></div>
+            <div class="bar" id="bar33"></div>
+            <div class="bar" id="bar34"></div>
+            <div class="bar" id="bar35"></div>
+            <div class="bar" id="bar36"></div>
+            <div class="bar" id="bar37"></div>
+            
+            <div class="bar" id="bar40"></div>
+            <div class="bar" id="bar41"></div>
+            <div class="bar" id="bar42"></div>
+            <div class="bar" id="bar43"></div>
+            <div class="bar" id="bar44"></div>
+            <div class="bar" id="bar45"></div>
+            <div class="bar" id="bar46"></div>
+            <div class="bar" id="bar47"></div>
+            
+            <div class="bar" id="bar50"></div>
+            <div class="bar" id="bar51"></div>
+            <div class="bar" id="bar52"></div>
+            <div class="bar" id="bar53"></div>
+            <div class="bar" id="bar54"></div>
+            <div class="bar" id="bar55"></div>
+            <div class="bar" id="bar56"></div>
+            <div class="bar" id="bar57"></div>
+            
+            <div class="bar" id="bar60"></div>
+            <div class="bar" id="bar61"></div>
+            <div class="bar" id="bar62"></div>
+            <div class="bar" id="bar63"></div>
+            <div class="bar" id="bar64"></div>
+            <div class="bar" id="bar65"></div>
+            <div class="bar" id="bar66"></div>
+            <div class="bar" id="bar67"></div>
+            
+            <div class="bar" id="bar70"></div>
+            <div class="bar" id="bar71"></div>
+            <div class="bar" id="bar72"></div>
+            <div class="bar" id="bar73"></div>
+            <div class="bar" id="bar74"></div>
+            <div class="bar" id="bar75"></div>
+            <div class="bar" id="bar76"></div>
+            <div class="bar" id="bar77"></div>
+        </div>
+        
+        <script>
+            //============ SELECT ===============
+            $('.sample').click(function() {
+                var sampleNum = $(this).attr("id").substring(6);
+                playPadPosition(sampleNum);
+            });
+            
+            //============ LIGHTING/INTERVAL ===============
+            var x = 0;
+            setInterval(function(){
+                var element = "#sample" + x;
+                
+                // Light up active sample
+                $(element).toggleClass("active");
+                //playPadPosition(x);
+                
+                // unlight previous active sample
+                var index = x - 1;
+                if(index == -1){ 
+                    element = "#sample" + 7;
+                } else {
+                    element = "#sample" + index;
+                }
+                
+                $(element).removeClass("active");
+
+                if(x == 7){ // must be set to # of samples - 1
+                    x = 0; 
+                } else {
+                    x++;  
+                }
+                
+            },300);
+        </script>
+    </body>
+</html>
