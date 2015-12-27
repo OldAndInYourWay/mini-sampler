@@ -27,29 +27,48 @@
                 box-sizing: border-box;
             }
             
-            .active {
-                border: solid #12B6CC 5px;   
-                box-sizing: border-box;
-            }
+            
             
             /*  SAMPLER 2          */
             #samplerwrapper2 {
-                height: 273px;
+                height: 293px;
                 width: 272px;
-                background-color:#FF7C00;
+                background-image: url(img/texture1.jpg);
                 margin: 0 auto;
+                border: solid #FF7C00 4px;
+                border-radius: 3px;
+            }
+            
+            .selected {
+                background-color: #f2b610 !important;  
+            }
+            
+            .active {
+                border: solid #12B6CC 5px;   
+                box-sizing: border-box;
             }
             
             .bar {
                 border-radius: 4px;
                 height: 30px;
                 width: 30px;
-                background-color: #222;
+                background-color: #FFF;
                 float: left;
                 margin: 2px;   
-                border-top: solid #B2AEAE 2px;
-                border-right: solid #B2AEAE 2px;
+                -moz-box-shadow:    inset 0 0 2px #000000;
+                -webkit-box-shadow: inset 0 0 2px #000000;
+                box-shadow:         inset 0 0 2px #000000;
                 box-sizing: border-box;
+            }
+            
+            .note {
+                width: 30px;
+                height: 10px;
+                float: left;
+                background-color: #FFF;
+                margin: 2px;
+                margin-bottom: 7px;
+                border-radius: 15px;
             }
         </style>
         <div id="samplerwrapper">
@@ -64,6 +83,15 @@
         </div>
         <hr/>
         <div id="samplerwrapper2">
+            <div class="note" id="note0"></div>
+            <div class="note" id="note1"></div>
+            <div class="note" id="note2"></div>
+            <div class="note" id="note3"></div>
+            <div class="note" id="note4"></div>
+            <div class="note" id="note5"></div>
+            <div class="note" id="note6"></div>
+            <div class="note" id="note7"></div>
+            
             <div class="bar" id="bar00"></div>
             <div class="bar" id="bar01"></div>
             <div class="bar" id="bar02"></div>
@@ -138,27 +166,35 @@
         </div>
         
         <script>
-            //============ SELECT ===============
-            $('.sample').click(function() {
-                var sampleNum = $(this).attr("id").substring(6);
-                playPadPosition(sampleNum);
+            $('.bar').click(function(){
+                $(this).toggleClass('selected'); 
             });
             
-            //============ LIGHTING/INTERVAL ===============
-            var x = 0;
-            setInterval(function(){
-                var element = "#sample" + x;
-                
+            var playSequence = function(time){
+                var x = 0;
+                setInterval(function(){
+                            
+                var element = "#note" + x;    
+                            
                 // Light up active sample
                 $(element).toggleClass("active");
-                //playPadPosition(x);
                 
+                // Play samples inline
+                if($('#bar' + "0" + x.toString()).hasClass('selected')) playPadPosition(0);    
+                if($('#bar' + "1" + x.toString()).hasClass('selected')) playPadPosition(1);
+                if($('#bar' + "2" + x.toString()).hasClass('selected')) playPadPosition(2); 
+                if($('#bar' + "3" + x.toString()).hasClass('selected')) playPadPosition(3); 
+                if($('#bar' + "4" + x.toString()).hasClass('selected')) playPadPosition(4); 
+                if($('#bar' + "5" + x.toString()).hasClass('selected')) playPadPosition(5); 
+                if($('#bar' + "6" + x.toString()).hasClass('selected')) playPadPosition(6); 
+                if($('#bar' + "7" + x.toString()).hasClass('selected')) playPadPosition(7);
+                    
                 // unlight previous active sample
                 var index = x - 1;
                 if(index == -1){ 
-                    element = "#sample" + 7;
+                    element = "#note" + 7;
                 } else {
-                    element = "#sample" + index;
+                    element = "#note" + index;
                 }
                 
                 $(element).removeClass("active");
@@ -167,9 +203,48 @@
                     x = 0; 
                 } else {
                     x++;  
-                }
-                
-            },300);
+                }         
+                }, time);
+            }
+            
+            playSequence(200);
+        
+        </script>
+        
+        
+        <script>
+//            //============ SELECT ===============
+//            $('.sample').click(function() {
+//                var sampleNum = $(this).attr("id").substring(6);
+//                playPadPosition(sampleNum);
+//            });
+//            
+//            //============ LIGHTING/INTERVAL ===============
+//            var x = 0;
+//            setInterval(function(){
+//                var element = "#sample" + x;
+//                
+//                // Light up active sample
+//                $(element).toggleClass("active");
+//                //playPadPosition(x);
+//                
+//                // unlight previous active sample
+//                var index = x - 1;
+//                if(index == -1){ 
+//                    element = "#sample" + 7;
+//                } else {
+//                    element = "#sample" + index;
+//                }
+//                
+//                $(element).removeClass("active");
+//
+//                if(x == 7){ // must be set to # of samples - 1
+//                    x = 0; 
+//                } else {
+//                    x++;  
+//                }
+//                
+//            },300);
         </script>
     </body>
 </html>

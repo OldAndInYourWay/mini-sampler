@@ -2,14 +2,14 @@
 var AudioContextConstructor = (window.AudioContext || window.webkitAudioContext ||  window.mozAudioContext || window.oAudioContext || window.msAudioContext);
 
 var sounds = [
-              './samplecollection1/dbk7.wav',
-              './samplecollection1/snare.wav',
-              './samplecollection1/note5.wav',
-              './samplecollection1/note1.wav',
-              './samplecollection1/note2.mp3',
-              './samplecollection1/note3.mp3', 
-              './samplecollection1/note4.wav',
-              './samplecollection1/note6.wav'
+              './samplecollection1/snare1.wav',
+              './samplecollection1/snare2.wav',
+              './samplecollection1/kick.wav',
+              './samplecollection1/hat_opened.wav',
+              './samplecollection1/hat_closed.wav',
+              './samplecollection1/clap.wav', 
+              './samplecollection1/sound1.wav',
+              './samplecollection1/sound2.wav'
             ];
 
 window.onload = init;
