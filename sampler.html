@@ -127,7 +127,8 @@
             <div id="sub-sampler-1">
                 <div id="screen-outer">
                     <div id="screen">
-                        
+                        <span id="kit-name"></span></br>
+                        <span id="bpm"></span>
                     </div> 
                 </div>
                 
@@ -141,14 +142,8 @@
                 </div>
                 
                 <div id="div-slider">
-                    <input type="range" defaultValue="100" id="slider" min="100" max="1000"/>
+                    <input type="range" defaultValue="100" id="slider" min="20" max="700"/>
                 </div>
-                <script>
-                    $('#div-slider').change(function(){
-                        var slider_value = $("#slider").val();  
-                        window.bpm = slider_value;
-                    });
-                </script>
             </div>
             <div style="width: 44px; height: 2px; float: left;" id="spacing"></div>
             <div class="note" id="note0"></div>
@@ -239,7 +234,6 @@
             <div class="bar" id="bar75"></div>
             <div class="bar" id="bar76"></div>
             <div class="bar" id="bar77"></div>
-            
         </div>
             
         <script src="bufferloader.js"></script>
@@ -253,7 +247,7 @@
             }    
             
             function initScreen(title){
-                $('#screen').text(title);   
+                $('#kit-name').text(title);   
             }
             
             initNames();
@@ -267,12 +261,19 @@
                 $(this).toggleClass('selected'); 
             });
             
+            //=== SLIDER CONTROL ===
+            // bpm = 60,000 / milliseconds 
+            $('#div-slider').change(function(){
+                var slider_value = $("#slider").val();  
+                window.bpm = slider_value;
+                window.show_bpm_val = Math.round(15000 / window.bpm);
+                $('#bpm').text("BPM: " + window.show_bpm_val);
+            });
+            
             
             //=== CONTINUOUS PLAY ===
-            var playSequence = function(time){
-                var x = 0;
-                setInterval(function(){
-                            
+            var x = 0; 
+            var playSequence = function(){                   
                 var element = "#note" + x;    
                             
                 // Light up active sample
@@ -302,8 +303,8 @@
                     x = 0; 
                 } else {
                     x++;  
-                }         
-                }, time);
+                }  
+                setTimeout(playSequence, window.bpm);
             }
             
             playSequence(window.bpm);
