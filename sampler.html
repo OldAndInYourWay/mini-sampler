@@ -8,34 +8,13 @@
     </head>
     <body>
         <style>
-
-            #samplerwrapper {
-                height: 100px;
-                width: 336px;
-                background-color:#FF7C00;
-                margin: 0 auto;
-            }
-            
-            .sample {
-                height: 30px;
-                width: 30px;
-                background-color: #222;
-                float: left;
-                margin: 6px;   
-                border-top: solid #B2AEAE 2px;
-                border-right: solid #B2AEAE 2px;
-                box-sizing: border-box;
-            }
-            
-            
-            
             /*  SAMPLER 2          */
-            #samplerwrapper2 {
+            #samplerwrapper {
                 height: 293px;
-                width: 272px;
+                width: 528px;
                 background-image: url(img/texture1.jpg);
                 margin: 0 auto;
-                border: solid #FF7C00 4px;
+                border: solid black 4px;
                 border-radius: 3px;
             }
             
@@ -70,19 +49,108 @@
                 margin-bottom: 7px;
                 border-radius: 15px;
             }
+            
+            .samplename {
+                margin: 2px;
+                width: 40px;
+                height: 30px;
+                float: left;
+                background-color: limegreen;
+                border-radius: 4px;
+                -moz-box-shadow:    inset 0 0 2px #000000;
+                -webkit-box-shadow: inset 0 0 2px #000000;
+                box-shadow:         inset 0 0 2px #000000;
+                box-sizing: border-box;
+                font-size: 9px;
+                line-height: 24px;
+                font-family: 'Arial Black';
+                overflow: hidden;
+                text-align: center;
+                color: white;
+            }
+            
+            #sub-sampler-1 {
+                height:  293px;
+                width: 210px;
+                background-color: #36343F;
+                float: right;
+                box-sizing: border-box;
+                border: solid #111 15px;
+                border-left: solid #111 13px;
+            }
+            
+            #screen-outer {
+                width: 150px;
+                height: 47px;
+                margin: 0 auto;
+                margin-top:5px;
+                border: solid 1px #222;
+                background-color: black;
+            }
+            
+            #screen{
+                background-color: limegreen;
+                font-size: 9px;
+                font-family: 'Arial';
+                height: 30px;
+                width: 120px;
+                margin-top: 8px;
+                margin-left: 4px;
+                border: solid 1px white;
+                color: black;
+                text-align: center;
+            }
+            
+            #kits {
+               width: 150px;     
+                margin: 0 auto;
+            }
+            
+            .kit {
+                height: 30px;
+                margin: 5px;
+                width: 40px;
+                background-color: red;
+                float: left;
+                border: white 1px solid;
+                box-sizing: border-box;
+            }
+            
+            #div-slider {
+                width: 135px;
+                margin: 0 auto;
+            }
+            
         </style>
         <div id="samplerwrapper">
-            <div class="sample" id="sample0"></div>
-            <div class="sample" id="sample1"></div>
-            <div class="sample" id="sample2"></div>
-            <div class="sample" id="sample3"></div>
-            <div class="sample" id="sample4"></div>
-            <div class="sample" id="sample5"></div>
-            <div class="sample" id="sample6"></div>
-            <div class="sample" id="sample7"></div>
-        </div>
-        <hr/>
-        <div id="samplerwrapper2">
+            <div style="height:293px; width:1px; float:right; background-color: white;"></div>
+            <div id="sub-sampler-1">
+                <div id="screen-outer">
+                    <div id="screen">
+                        
+                    </div> 
+                </div>
+                
+                <div id="kits">
+                    <div class="kit" id="kit0"></div>
+                    <div class="kit" id="kit1"></div>
+                    <div class="kit" id="kit2"></div>
+                    <div class="kit" id="kit3"></div>
+                    <div class="kit" id="kit4"></div>
+                    <div class="kit" id="kit5"></div>
+                </div>
+                
+                <div id="div-slider">
+                    <input type="range" defaultValue="100" id="slider" min="100" max="1000"/>
+                </div>
+                <script>
+                    $('#div-slider').change(function(){
+                        var slider_value = $("#slider").val();  
+                        window.bpm = slider_value;
+                    });
+                </script>
+            </div>
+            <div style="width: 44px; height: 2px; float: left;" id="spacing"></div>
             <div class="note" id="note0"></div>
             <div class="note" id="note1"></div>
             <div class="note" id="note2"></div>
@@ -92,6 +160,7 @@
             <div class="note" id="note6"></div>
             <div class="note" id="note7"></div>
             
+            <div class="samplename" id="name0">snare1</div>
             <div class="bar" id="bar00"></div>
             <div class="bar" id="bar01"></div>
             <div class="bar" id="bar02"></div>
@@ -101,6 +170,7 @@
             <div class="bar" id="bar06"></div>
             <div class="bar" id="bar07"></div>
             
+            <div class="samplename" id="name1"></div>
             <div class="bar" id="bar10"></div>
             <div class="bar" id="bar11"></div>
             <div class="bar" id="bar12"></div>
@@ -110,6 +180,7 @@
             <div class="bar" id="bar16"></div>
             <div class="bar" id="bar17"></div>
             
+            <div class="samplename" id="name2"></div>
             <div class="bar" id="bar20"></div>
             <div class="bar" id="bar21"></div>
             <div class="bar" id="bar22"></div>
@@ -119,6 +190,7 @@
             <div class="bar" id="bar26"></div>
             <div class="bar" id="bar27"></div>
             
+            <div class="samplename" id="name3"></div>
             <div class="bar" id="bar30"></div>
             <div class="bar" id="bar31"></div>
             <div class="bar" id="bar32"></div>
@@ -128,6 +200,7 @@
             <div class="bar" id="bar36"></div>
             <div class="bar" id="bar37"></div>
             
+            <div class="samplename" id="name4"></div>
             <div class="bar" id="bar40"></div>
             <div class="bar" id="bar41"></div>
             <div class="bar" id="bar42"></div>
@@ -137,6 +210,7 @@
             <div class="bar" id="bar46"></div>
             <div class="bar" id="bar47"></div>
             
+            <div class="samplename" id="name5"></div>
             <div class="bar" id="bar50"></div>
             <div class="bar" id="bar51"></div>
             <div class="bar" id="bar52"></div>
@@ -146,6 +220,7 @@
             <div class="bar" id="bar56"></div>
             <div class="bar" id="bar57"></div>
             
+            <div class="samplename" id="name6"></div>
             <div class="bar" id="bar60"></div>
             <div class="bar" id="bar61"></div>
             <div class="bar" id="bar62"></div>
@@ -155,6 +230,7 @@
             <div class="bar" id="bar66"></div>
             <div class="bar" id="bar67"></div>
             
+            <div class="samplename" id="name7"></div>
             <div class="bar" id="bar70"></div>
             <div class="bar" id="bar71"></div>
             <div class="bar" id="bar72"></div>
@@ -163,13 +239,36 @@
             <div class="bar" id="bar75"></div>
             <div class="bar" id="bar76"></div>
             <div class="bar" id="bar77"></div>
+            
         </div>
-        
+            
+        <script src="bufferloader.js"></script>
+        <script src="sampler.js"></script>
         <script>
+            //===== INITIALIZE SAMPLE NAMES ====== 
+            function initNames(){
+              for(var i = 0; i < sounds.length; i++){
+                    $('#name' + i).text(sounds[i].substring(sounds[i].lastIndexOf("/") + 1));   
+                }  
+            }    
+            
+            function initScreen(title){
+                $('#screen').text(title);   
+            }
+            
+            initNames();
+            initScreen("kit0");
+        </script>
+        <script>
+            //========= CONTROLLER =========
+            
+            //=== SELECT BAR-NOTE ===
             $('.bar').click(function(){
                 $(this).toggleClass('selected'); 
             });
             
+            
+            //=== CONTINUOUS PLAY ===
             var playSequence = function(time){
                 var x = 0;
                 setInterval(function(){
@@ -207,44 +306,8 @@
                 }, time);
             }
             
-            playSequence(200);
+            playSequence(window.bpm);
         
-        </script>
-        
-        
-        <script>
-//            //============ SELECT ===============
-//            $('.sample').click(function() {
-//                var sampleNum = $(this).attr("id").substring(6);
-//                playPadPosition(sampleNum);
-//            });
-//            
-//            //============ LIGHTING/INTERVAL ===============
-//            var x = 0;
-//            setInterval(function(){
-//                var element = "#sample" + x;
-//                
-//                // Light up active sample
-//                $(element).toggleClass("active");
-//                //playPadPosition(x);
-//                
-//                // unlight previous active sample
-//                var index = x - 1;
-//                if(index == -1){ 
-//                    element = "#sample" + 7;
-//                } else {
-//                    element = "#sample" + index;
-//                }
-//                
-//                $(element).removeClass("active");
-//
-//                if(x == 7){ // must be set to # of samples - 1
-//                    x = 0; 
-//                } else {
-//                    x++;  
-//                }
-//                
-//            },300);
         </script>
     </body>
 </html>
