@@ -1,7 +1,9 @@
 # mini-sampler
 ## ks12hx-01 sampler/sequencer
-tiny sampler to place on my website
+a very tiny sampler thingy
 
-[Play with the ks12hx-01 sampler/sequencer!](http://khalilstemmler.com/sampler/sampler.html)
+[You can play with the ks12hx-01 sampler/sequencer here!](http://khalilstemmler.com/sampler/sampler.html)
+
+*Compatible with* **Google Chrome**
 
 ![ks12hx-01 sampler/sequencer](http://i.imgur.com/my38NYh.png)
