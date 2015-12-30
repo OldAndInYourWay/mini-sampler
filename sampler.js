@@ -31,23 +31,54 @@ var kits = {
                        './samplecollection2/Kit_Snare06.wav',
                        './samplecollection2/Kit_Tom01.wav',
                        './samplecollection2/Ride06.wav',
-                       './samplecollection2/Snare_Roll01.wav']
+                       './samplecollection2/Snare_Roll01.wav'
+                        ],
+                kit2 : ['./samplecollection3/1.wav',
+                       './samplecollection3/2.wav',
+                       './samplecollection3/3.wav',
+                       './samplecollection3/4.wav',
+                       './samplecollection3/5.wav',
+                       './samplecollection3/6.mp3',
+                       './samplecollection3/7.wav',
+                       './samplecollection3/1.wav']
 
                         };
-
+var initialized;
 window.onload = init(kits['kit0']);
 window.bpm = 300;
 var context;
 var bufferLoader;
 var sampleList;
+var slider = {
+    state: "unlocked",
+    isLocked: function(){
+        return this.state === "locked";
+    },
+    $slider: $('#slider'),
+    setBPM: function(val) { 
+        this.$slider.slider("value", val);
+    },
+    lockSlider: function (){
+        this.state = "locked";
+        this.$slider.slider( "disable" );
+    },
+    unlockSlider: function (){
+        this.state = "unlocked";
+        this.$slider.slider( "enable" );
+    }
+}
 
 
 //=========== INITIALIZE SAMPLES ============
 function init(kit) {
-  if(context !== null){
-    context = null;   
+  if(!initialized){
+      //The Audio Context should be initialized only once
+      if(AudioContextConstructor){
+          context = new AudioContextConstructor();
+          initialized = true;
+      } 
   }
-  context = new AudioContext();
+  
   bufferLoader = new BufferLoader(
     context,
     kit,
@@ -74,6 +105,7 @@ function playSound(buffer) {
                                              // note: on older systems, may have to use deprecated noteOn(time);
 }
 
+
 function finishedLoading(bufferList) {
 //========== update samples list =======
     sampleList = bufferList; 
@@ -82,8 +114,48 @@ function finishedLoading(bufferList) {
  //=== SELECT KIT =====
     $('.kit').click(function() {
         init(kits[$(this).attr("id")]);
-        initScreen($(this).attr("id"));
-        initNames();
+        initNames($(this).attr("id"));
+        slider.unlockSlider();
+        
+        if($(this).attr("id") == "kit0") initScreen($(this).attr("id") + " - Default Kit");
+        if($(this).attr("id") == "kit1") initScreen($(this).attr("id") + " - Jazz Kit");
+        if($(this).attr("id") == "kit2") {
+            initScreen($(this).attr("id") + " - \"Riot\" Kit");
+            slider.setBPM(430); //this is computed in some sort of convoluted way, you have to debug how this is working
+            slider.lockSlider();
+        }
+//        if($(this).attr("id") == "kit3")
+//        if($(this).attr("id") == "kit4")
+//        if($(this).attr("id") == "kit5")
+                                
     });
 
+/**
+ * Gets the browser name or returns an empty string if unknown. 
+ * This function also caches the result to provide for any 
+ * future calls this function has.
+ *
+ * @returns {string}
+ */
+var browser = function() {
+    // Return cached result if avalible, else get result then cache it.
+    if (browser.prototype._cachedResult)
+        return browser.prototype._cachedResult;
+
+    var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+    var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+    var isChrome = !!window.chrome && !isOpera;// Chrome 1+
+    var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+
+    return (browser.prototype._cachedResult =
+        isOpera ? 'Opera' :
+        isFirefox ? 'Firefox' :
+        isSafari ? 'Safari' :
+        isChrome ? 'Chrome' :
+        isIE ? 'IE' :
+        '');
+};
     

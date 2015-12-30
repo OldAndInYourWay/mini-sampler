@@ -6,15 +6,19 @@ function BufferLoader(context, urlList, callback) {
   this.loadCount = 0;
 }
 
+
+
 BufferLoader.prototype.loadBuffer = function(url, index) {
   // Load buffer asynchronously
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.responseType = "arraybuffer";
+  request.setRequestHeader('Access-Control-Allow-Headers', '*');
+    request.setRequestHeader('Access-Control-Allow-Origin', '*');
 
   var loader = this;
-
-  request.onload = function() {
+    
+    function decodeAudio(url, index){
     // Asynchronously decode the audio file data in request.response
     loader.context.decodeAudioData(
       request.response,
@@ -31,6 +35,10 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
         console.error('decodeAudioData error', error);
       }
     );
+}
+
+  request.onload = function() {
+     decodeAudio(url, index);
   }
 
   request.onerror = function() {
@@ -44,3 +52,4 @@ BufferLoader.prototype.load = function() {
   for (var i = 0; i < this.urlList.length; ++i)
   this.loadBuffer(this.urlList[i], i);
 }
+
