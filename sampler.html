@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="../tools/sweetalert/dist/sweetalert.css">
         <script src="bufferloader.js"></script>
         <script src="sampler.js"></script>
+        <script src="examples.js"></script>
     </head>
     <body>
         <style>
@@ -217,9 +218,28 @@
                 margin-right: 20px;
             }
             
+            #examples {
+                width: 50px;
+                height: 20px;
+                background-color: #0091C2;
+                margin: 0 auto;
+                position: relative;
+                top:100px;
+                font-size: 9px;
+                color: black;
+                border-right: black solid 1px;
+                border-bottom: black solid 2px;
+            }
+            
             a           { color: white; text-decoration: none; }
             a:visited { color: white; text-decoration: none }
             a:hover { color: white; text-decoration: none }
+            
+            #flashing-info {
+                text-align: center;
+                color: white;
+                font-size:19px;
+            }
         </style>
         
         <div id="nav">
@@ -247,6 +267,38 @@
                     <div class="kit" id="kit5"></div>
                 </div>
             <div id="slider"></div>
+            <div id="examples"></div>
+            <script>
+                //====== EXAMPLES ==========
+                    var animateEx = function() {
+                        $( "#examples" ).animate({
+                            backgroundColor: '#00ffb2'
+                        }, 'slow');
+                        $( "#examples" ).animate({
+                            backgroundColor: '#0091C2'
+                        }, 'slow');
+                        setTimeout(animateEx, 2000);
+                    }
+                    animateEx();
+                $('#examples').click(function(){
+                    examples.clearAll();
+                   if(kits.currentkit == "kit0"){
+                       examples.initExample0();
+                   } else if (kits.currentkit == "kit1"){
+                       examples.initExample1();   
+                   } else if (kits.currentkit == "kit2"){
+                       examples.initExample2();  
+                   } else if (kits.currentkit == "kit3"){
+                       examples.initExample3();  
+                   } else if (kits.currentkit == "kit4"){
+                       examples.initExample4();  
+                   } else if (kits.currentkit == "kit5"){
+                       examples.initExample5();  
+                   }
+                });
+                
+                    
+            </script>
             
         </div>
             <div style="width: 44px; height: 2px; float: left;" id="spacing"></div>
@@ -340,9 +392,10 @@
             <div class="bar" id="bar77"></div>
         </div>
         <div id="instructions">
-            <p>The <span class="special-blue">ks12hx-01</span> is a basic 64-button pad sampler/sequencer.</br><span style="font-size: 13px;">Currently only supported in the Chrome/Android web browsers.</span></p></br>
+            <p>The <span class="special-blue">ks12hx-01</span> is a basic 64-button pad sampler/sequencer.</br><span style="font-size: 13px;">Currently only supported in the Chrome/Android web browsers.</br>Requirements: 512mb available RAM. Mobile devices lacking this may experience latency.</span></p></br>
             <p><strong><u>HOW TO USE</u></strong><br></p>
             <div id="instruction-body">
+                <p id="flashing-info">Click the <span class="special-blue">flashing button</span> for an example pattern!</p>
                 <p>> Selecting a kit</br>
                    <span style="font-size: 13px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 6 <span style="color: red;">red</span> buttons trigger a new kit.</span></br></br>
                   > Sequencing Samples</br>
@@ -401,7 +454,7 @@
                 $( "#slider" ).slider({
                   value:100,
                   min: 20,
-                  max: 700,
+                  max: 2000,
                   slide: function( event, ui ) {
                       if(!slider.isLocked()){
                         var slider_value = ui.value;  
@@ -469,5 +522,6 @@
             }
             
         </script>
+        <img id="link-img" src="img/image.PNG" style="display:none;"></img>
     </body>
 </html>

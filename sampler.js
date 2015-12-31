@@ -13,6 +13,7 @@ var sounds = [
             ];
 
 var kits = {
+                currentkit: "kit0",
                 kit0: [
                       './samplecollection1/kick2.wav',
                       './samplecollection1/snare2.wav',
@@ -38,9 +39,37 @@ var kits = {
                        './samplecollection3/3.wav',
                        './samplecollection3/4.wav',
                        './samplecollection3/5.wav',
-                       './samplecollection3/6.mp3',
+                       './samplecollection3/6.wav',
                        './samplecollection3/7.wav',
-                       './samplecollection3/1.wav']
+                       './samplecollection3/1.wav'
+                       ],
+                kit3 : ['./samplecollection4/1.wav',
+                       './samplecollection4/2.wav',
+                       './samplecollection4/3.wav',
+                       './samplecollection4/4.wav',
+                       './samplecollection4/5.wav',
+                       './samplecollection4/6.wav',
+                       './samplecollection4/7.wav',
+                       './samplecollection4/8.wav'
+                       ],
+                kit4 : ['./samplecollection5/1.wav',
+                       './samplecollection5/2.wav',
+                       './samplecollection5/3.wav',
+                       './samplecollection5/4.wav',
+                       './samplecollection5/5.wav',
+                       './samplecollection5/6.wav',
+                       './samplecollection5/7.wav',
+                       './samplecollection5/8.wav'
+                       ],
+                kit5 : ['./samplecollection6/1.wav',
+                       './samplecollection6/2.wav',
+                       './samplecollection6/3.wav',
+                       './samplecollection6/4.wav',
+                       './samplecollection6/5.wav',
+                       './samplecollection6/6.wav',
+                       './samplecollection6/7.wav',
+                       './samplecollection6/8.wav'
+                       ]
 
                         };
 var initialized;
@@ -116,6 +145,7 @@ function finishedLoading(bufferList) {
         init(kits[$(this).attr("id")]);
         initNames($(this).attr("id"));
         slider.unlockSlider();
+        kits.currentkit = $(this).attr("id");
         
         if($(this).attr("id") == "kit0") initScreen($(this).attr("id") + " - Default Kit");
         if($(this).attr("id") == "kit1") initScreen($(this).attr("id") + " - Jazz Kit");
@@ -124,9 +154,22 @@ function finishedLoading(bufferList) {
             slider.setBPM(430); //this is computed in some sort of convoluted way, you have to debug how this is working
             slider.lockSlider();
         }
-//        if($(this).attr("id") == "kit3")
-//        if($(this).attr("id") == "kit4")
-//        if($(this).attr("id") == "kit5")
+        if($(this).attr("id") == "kit3") {
+            initScreen($(this).attr("id") + " - \"ILYBILY\" Kit");
+            slider.setBPM(2000); //this is computed in some sort of convoluted way, you have to debug how this is working
+            slider.lockSlider();
+        }
+        
+        if($(this).attr("id") == "kit4"){
+            initScreen($(this).attr("id") + " - \"In The Lot\" Kit");
+            slider.setBPM(985); //this is computed in some sort of convoluted way, you have to debug how this is working
+            slider.lockSlider();
+        }
+        if($(this).attr("id") == "kit5"){
+           initScreen($(this).attr("id") + " - \"Blundered Soul\" Kit");
+            slider.setBPM(1550); //this is computed in some sort of convoluted way, you have to debug how this is working
+            slider.lockSlider();    
+        }
                                 
     });
 
@@ -158,4 +201,5 @@ var browser = function() {
         isIE ? 'IE' :
         '');
 };
+
     
